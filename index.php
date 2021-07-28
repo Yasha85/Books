@@ -41,10 +41,10 @@
                   </div>
                   <div class="col-md-9">
                      <h2><?=$book['nameBook']; ?></h2>
-                     <h6>Автор: <?=$book['name']; ?></h6>
+                     <h6>Автор:<a href="/author?id=<?=$book['author_id'];?>"> <?=$book['name']; ?> </a> </h6>
                      <p><?=truncate_string($book['description'], 480); ?></p>
                      <p class="text-small"><span class="font-weight-bold">год издания:</span> <?=$book['year']; ?></p>
-                     <p class="text-small"><span class="font-weight-bold">жанр:</span> <?=$book['nameGenre']; ?></p>
+                     <p class="text-small"><span class="font-weight-bold">жанр:</span> <a href="/genre?id=<?=$book['genre_id'];?>"><?=$book['nameGenre']; ?></a> </p>
                   </div>
                </div>
                <?php

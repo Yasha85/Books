@@ -52,10 +52,10 @@
                   </div>
                   <div class="col-md-9">
                      <h2><?=$booksAuthorId['nameBook']; ?></h2>
-                     <h6>Автор: <?=$booksAuthorId['name']; ?></h6>
+                     <h6>Автор: <a href="/author?id=<?=$booksAuthorId['author_id'];?>"> <?=$booksAuthorId['name']; ?> </a> </h6>
                      <p><?=truncate_string($booksAuthorId['description'],480); ?></p>
                      <p class="text-small"><span class="font-weight-bold">год издания:</span> <?=$booksAuthorId['year']; ?></p>
-                     <p class="text-small"><span class="font-weight-bold">жанр:</span> <?=$booksAuthorId['nameGenre']; ?></p>
+                      <p class="text-small"><span class="font-weight-bold">жанр:</span><a href="/genre?id=<?=$booksAuthorId['genre_id'];?>"> <?=$booksAuthorId['nameGenre']; ?></a></p>
                   </div>
                </div>
             </div>

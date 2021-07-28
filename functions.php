@@ -5,7 +5,7 @@ function get_books($limit, $offset)
 //Делаем запрос к БД, результат запроса пишем в $result:
 mysqli_query($link, "SET NAMES 'utf8'");
 //Формируем тестовый запрос:
-$query = "SELECT  books.nameBook, authors.name,  books.description, genres.nameGenre, books.year, books.image
+$query = "SELECT  books.nameBook, books.author_id, authors.name, books.genre_id, books.description, genres.nameGenre, books.year, books.image
 FROM books
 INNER JOIN authors ON authors.author_id=books.author_id
 INNER JOIN genres ON genres.genre_id=books.genre_id
@@ -72,7 +72,7 @@ function get_booksAuthors($id)
 //Делаем запрос к БД, результат запроса пишем в $result:
 mysqli_query($link, "SET NAMES 'utf8'");
 //Формируем тестовый запрос:
-$query = "SELECT  books.nameBook, authors.name,  books.description, genres.nameGenre, books.year, books.image
+$query = "SELECT  books.nameBook, books.author_id, books.genre_id, authors.name,  books.description, genres.nameGenre, books.year, books.image
 FROM books
 INNER JOIN authors ON authors.author_id=books.author_id
 INNER JOIN genres ON genres.genre_id=books.genre_id
@@ -108,7 +108,7 @@ return $data;
 function get_booksGenre($id)
 {include 'config.php';
 mysqli_query($link, "SET NAMES 'utf8'");
-$query = "SELECT  books.nameBook, authors.name, genres.descriptionGenre, authors.author_id, books.description, genres.nameGenre, books.year, books.image
+$query = "SELECT  books.nameBook, authors.name, books.genre_id, genres.descriptionGenre, authors.author_id, books.description, genres.nameGenre, books.year, books.image
 FROM books
 INNER JOIN authors ON authors.author_id=books.author_id
 INNER JOIN genres ON genres.genre_id=books.genre_id
