@@ -1,10 +1,17 @@
 <?php
-   $host = 'localhost'; //имя хоста, на локальном компьютере это localhost
-$user = 'z292401s_1'; //имя пользователя, по умолчанию это root
-$password = 'xNoc5&yy'; //пароль, по умолчанию пустой
-$db_name = 'z292401s_1'; //имя базы данных
+$host = 'localhost'; //имя хоста, на локальном компьютере это localhost
+$user = 'mysql'; //имя пользователя, по умолчанию это root
+$password = 'mysql'; //пароль, по умолчанию пустой
+$db_name = 'storebooks'; //имя базы данных
 //Соединяемся с базой данных используя наши доступы:
-$link = mysqli_connect($host, $user, $password, $db_name);
+$charset = 'utf8';
+
+$dsn = "mysql:host=$host;dbname=$db_name;charset=$charset";
+$opt = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES  => false,
+];
+$pdo = new PDO($dsn, $user, $password, $opt);
 
 
-?>

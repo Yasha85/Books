@@ -19,7 +19,9 @@
       <main role="main">
          <?php
          $result = get_author($id);
+         if (!empty($result)) {
          $author  = $result[0];
+         }
          if(empty($author)) : ?>
          <?php include '404.php'; ?>
          <?php else : ?>

@@ -15,14 +15,15 @@
       $id = isset($_GET['id']) ? $_GET['id'] : 1;
       $booksGenre = get_booksGenre($id);
       $result = get_booksGenre($id);
-      $genre = $result[0];
+      if (!empty($result)) {
+      $genre  = $result[0];
+      }
       $uniqueAuthors=[];
       foreach ($booksGenre as $item) {
       $uniqueAuthors[$item['author_id']]=$item['name'];}?>
       <?php if (empty($genre)) :?>
       <?php include '404.php'; ?>
       <?php else : ?>
-      
       <main role="main">
          <div class="jumbotron">
             <div class="container">
