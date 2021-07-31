@@ -1,18 +1,25 @@
 <?php
+
 include 'config.php';
 $GLOBALS['pdo'] = new PDO($dsn, $user, $password, $opt);
-// вывод книг для индекс
+/**
+ * @param $limit
+ * @param $offset
+ * @return mixed
+ */
 function get_books($limit, $offset)
 {
     include 'config.php';
 
 //Формируем тестовый запрос:
-    $stmt = $GLOBALS['pdo']->prepare("SELECT  books.nameBook, books.author_id, authors.name, books.genre_id, books.description, genres.nameGenre, books.year, books.image
+    $stmt = $GLOBALS['pdo']->prepare(
+        "SELECT  books.nameBook, books.author_id, authors.name, books.genre_id, books.description, genres.nameGenre, books.year, books.image
 FROM books
 INNER JOIN authors ON authors.author_id=books.author_id
 INNER JOIN genres ON genres.genre_id=books.genre_id
 ORDER BY books.nameBook ASC
-LIMIT $limit OFFSET $offset ");
+LIMIT $limit OFFSET $offset "
+    );
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -64,10 +71,12 @@ function get_authors()
 function get_author($id)
 {
     include 'config.php';
-    $stmt = $GLOBALS['pdo']->prepare("SELECT * FROM authors
+    $stmt = $GLOBALS['pdo']->prepare(
+        "SELECT * FROM authors
 WHERE authors.author_id =?
 ORDER BY name ASC
-LIMIT 1");
+LIMIT 1"
+    );
     $stmt->execute([$id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -77,12 +86,14 @@ function get_booksAuthors($id)
 {
     include 'config.php';
 //Делаем запрос к БД, результат запроса пишем в $result:
-    $stmt = $GLOBALS['pdo']->prepare("SELECT  books.nameBook, books.author_id, books.genre_id, authors.name,  books.description, genres.nameGenre, books.year, books.image
+    $stmt = $GLOBALS['pdo']->prepare(
+        "SELECT  books.nameBook, books.author_id, books.genre_id, authors.name,  books.description, genres.nameGenre, books.year, books.image
 FROM books
 INNER JOIN authors ON authors.author_id=books.author_id
 INNER JOIN genres ON genres.genre_id=books.genre_id
 WHERE authors.author_id = ?
-ORDER BY books.nameBook ASC");
+ORDER BY books.nameBook ASC"
+    );
     $stmt->execute([$id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -111,12 +122,14 @@ return $stmt->fetchAll(PDO::FETCH_ASSOC);
 function get_booksGenre($id)
 {
     include 'config.php';
-    $stmt = $GLOBALS['pdo']->prepare("SELECT  books.nameBook, authors.name, books.genre_id, genres.descriptionGenre, authors.author_id, books.description, genres.nameGenre, books.year, books.image
+    $stmt = $GLOBALS['pdo']->prepare(
+        "SELECT  books.nameBook, authors.name, books.genre_id, genres.descriptionGenre, authors.author_id, books.description, genres.nameGenre, books.year, books.image
 FROM books
 INNER JOIN authors ON authors.author_id=books.author_id
 INNER JOIN genres ON genres.genre_id=books.genre_id
 WHERE genres.genre_id = ?
-ORDER BY books.nameBook ASC");
+ORDER BY books.nameBook ASC"
+    );
     $stmt->execute([$id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

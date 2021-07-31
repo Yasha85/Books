@@ -10,7 +10,8 @@
 </head>
 <body>
 <!-- header -->
-<?php include 'parts/header.php'; ?>
+<?php
+include 'parts/header.php'; ?>
 <?php
 include 'config.php';
 include 'functions.php';
@@ -24,8 +25,10 @@ $booksAuthors = get_booksAuthors($id);
         $author = $result[0];
     }
     if (empty($author)) : ?>
-        <?php include '404.php'; ?>
-    <?php else : ?>
+        <?php
+        include '404.php'; ?>
+    <?php
+    else : ?>
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-3"><?= $author['name']; ?></h1>
@@ -42,12 +45,15 @@ $booksAuthors = get_booksAuthors($id);
                 </div>
             </div>
         </div>
-    <?php endif; ?>
-    <?php if (!empty($author)) : ?>
+    <?php
+    endif; ?>
+    <?php
+    if (!empty($author)) : ?>
         <div class="container">
             <h2 class="mb-4">Книги автора:</h2>
             <!-- Catalog -->
-            <?php foreach ($booksAuthors as $booksAuthorId): ?>
+            <?php
+            foreach ($booksAuthors as $booksAuthorId): ?>
                 <div class="card-list">
                     <div class="row card-item mb-4 pb-4 border-bottom">
                         <div class="col-md-3">
@@ -67,12 +73,15 @@ $booksAuthors = get_booksAuthors($id);
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            <?php
+            endforeach; ?>
         </div>
-    <?php endif; ?>
+    <?php
+    endif; ?>
 </main>
 <!-- footer -->
-<?php include 'parts/footer.php'; ?>
+<?php
+include 'parts/footer.php'; ?>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

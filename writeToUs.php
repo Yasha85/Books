@@ -10,7 +10,8 @@
 </head>
 <body>
 <!-- header -->
-<?php include 'parts/header.php';
+<?php
+include 'parts/header.php';
 include 'functions.php';
 include 'config.php';
 ?>
@@ -24,8 +25,10 @@ include 'config.php';
     </div>
 </main>
 
-<?php if (isset($_POST['submit'])): ?>
-    <?php if ((mb_strlen($_POST['firstname'])) < 2) {
+<?php
+if (isset($_POST['submit'])): ?>
+    <?php
+    if ((mb_strlen($_POST['firstname'])) < 2) {
         $errors[] = 'Фамилия слишком короткая';
     }
     if ((mb_strlen($_POST['firstname'])) > 50) {
@@ -44,7 +47,8 @@ include 'config.php';
         $errors[] = 'Выберите хотя бы один жанр';
     }
     ?>
-    <?php if (empty($errors)): ?>
+    <?php
+    if (empty($errors)): ?>
         <?php
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
@@ -56,8 +60,17 @@ include 'config.php';
         $sql = "INSERT INTO readers (firstname, lastname, Email, genre,number_of_books,like_reading,about)
         VALUES (:firstname,:lastname,:Email,:genre, :number_of_books,:like_reading,:about)";
         $stmt = $GLOBALS['pdo']->prepare($sql);
-        $stmt->execute(['firstname' => $firstname, 'lastname' => $lastname, 'Email' => $Email, 'genre' => $genre,
-            'number_of_books' => $number_of_books, 'like_reading' => $like_reading, 'about' => $about]);
+        $stmt->execute(
+            [
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'Email' => $Email,
+                'genre' => $genre,
+                'number_of_books' => $number_of_books,
+                'like_reading' => $like_reading,
+                'about' => $about
+            ]
+        );
         ?>
         <div class="alert alert-success" role="alert">
             Сообщение успешно отправлено!
@@ -66,53 +79,73 @@ include 'config.php';
         $message = get_message();
         $From_mail = $_POST['Email'];
         mail('NewBook@example.com', 'О читателе', $message, "From: $From_mail"); ?>
-    <?php else: ?>
+    <?php
+    else: ?>
         <div class="alert alert-danger" role="alert">
-            <?php foreach ($errors as $err) {
+            <?php
+            foreach ($errors as $err) {
                 echo $err . "<br/>";
             } ?>
         </div>
-    <?php endif; ?>
-<?php endif; ?>
+    <?php
+    endif; ?>
+<?php
+endif; ?>
 <div class="container">
     <form action="" method="post">
         <div class="form-group">
             <label for="exampleFormControlInput1">Ваша фамилия</label>
             <input type="text"
-                   class="form-control"<?php if ((!empty($_POST)) && (!empty($errors))): ?> value="<?= $_POST['firstname'] ?? ''; ?>" <?php endif; ?>
+                   class="form-control"<?php
+            if ((!empty($_POST)) && (!empty($errors))): ?> value="<?= $_POST['firstname'] ?? ''; ?>" <?php
+            endif; ?>
                    name="firstname" placeholder="Иванов(а)">
             <label for="exampleFormControlInput1">Ваше имя</label>
             <input type="text"
-                   class="form-control"<?php if ((!empty($_POST)) && (!empty($errors))): ?> value="<?= $_POST['lastname'] ?? ''; ?>" <?php endif; ?>
+                   class="form-control"<?php
+            if ((!empty($_POST)) && (!empty($errors))): ?> value="<?= $_POST['lastname'] ?? ''; ?>" <?php
+            endif; ?>
                    name="lastname" placeholder="Иван(а)">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">Ваша электронная почта</label>
             <input type="text"
-                   class="form-control" <?php if ((!empty($_POST)) && (!empty($errors))): ?> value="<?= $_POST['Email'] ?? ''; ?>" <?php endif; ?>
+                   class="form-control" <?php
+            if ((!empty($_POST)) && (!empty($errors))): ?> value="<?= $_POST['Email'] ?? ''; ?>" <?php
+            endif; ?>
                    name="Email" placeholder="name@example.com">
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Сколько книг за год вы читаете?</label>
             <select class="form-control" name="number_of_books">
                 <option
-                    <?php if ((!empty($_POST)) && (!empty($errors)) && ($_POST['number_of_books']) === '1'): ?>selected="selected"<?php endif; ?>
+                    <?php
+                    if ((!empty($_POST)) && (!empty($errors)) && ($_POST['number_of_books']) === '1'): ?>selected="selected"<?php
+                endif; ?>
                     value="1">1
                 </option>
                 <option
-                    <?php if ((!empty($_POST)) && (!empty($errors)) && ($_POST['number_of_books']) === '2'): ?>selected="selected"<?php endif; ?>
+                    <?php
+                    if ((!empty($_POST)) && (!empty($errors)) && ($_POST['number_of_books']) === '2'): ?>selected="selected"<?php
+                endif; ?>
                     value="2">2
                 </option>
                 <option
-                    <?php if ((!empty($_POST)) && (!empty($errors)) && ($_POST['number_of_books']) === '3'): ?>selected="selected"<?php endif; ?>
+                    <?php
+                    if ((!empty($_POST)) && (!empty($errors)) && ($_POST['number_of_books']) === '3'): ?>selected="selected"<?php
+                endif; ?>
                     value="3">3
                 </option>
                 <option
-                    <?php if ((!empty($_POST)) && (!empty($errors)) && ($_POST['number_of_books']) === '4'): ?>selected="selected"<?php endif; ?>
+                    <?php
+                    if ((!empty($_POST)) && (!empty($errors)) && ($_POST['number_of_books']) === '4'): ?>selected="selected"<?php
+                endif; ?>
                     value="4">4
                 </option>
                 <option
-                    <?php if ((!empty($_POST)) && (!empty($errors)) && ($_POST['number_of_books']) === '5'): ?>selected="selected"<?php endif; ?>
+                    <?php
+                    if ((!empty($_POST)) && (!empty($errors)) && ($_POST['number_of_books']) === '5'): ?>selected="selected"<?php
+                endif; ?>
                     value="5">5
                 </option>
             </select>
@@ -120,7 +153,12 @@ include 'config.php';
         Какие жанры любишь?<br>
         <div class="form-check">
             <input class="form-check-input"
-                   type="checkbox"<?php if ((!empty($_POST['genre'])) && (!empty($errors)) && (in_array('Антиутопия', $_POST['genre']))): ?>      checked="checked"<?php endif; ?>
+                   type="checkbox"<?php
+            if ((!empty($_POST['genre'])) && (!empty($errors)) && (in_array(
+                    'Антиутопия',
+                    $_POST['genre']
+                ))): ?>      checked="checked"<?php
+            endif; ?>
                    value="Антиутопия" name="genre[]">
             <label class="form-check-label" for="defaultCheck1">
                 Антиутопия
@@ -128,7 +166,12 @@ include 'config.php';
         </div>
         <div class="form-check">
             <input class="form-check-input"
-                   type="checkbox"<?php if ((!empty($_POST['genre'])) && (!empty($errors)) && (in_array('Юмор', $_POST['genre']))): ?>      checked="checked"<?php endif; ?>
+                   type="checkbox"<?php
+            if ((!empty($_POST['genre'])) && (!empty($errors)) && (in_array(
+                    'Юмор',
+                    $_POST['genre']
+                ))): ?>      checked="checked"<?php
+            endif; ?>
                    value="Юмор" name="genre[]">
             <label class="form-check-label" for="defaultCheck2">
                 Юмор
@@ -136,7 +179,12 @@ include 'config.php';
         </div>
         <div class="form-check">
             <input class="form-check-input"
-                   type="checkbox"<?php if ((!empty($_POST['genre'])) && (!empty($errors)) && (in_array('Фэнтези', $_POST['genre']))): ?>      checked="checked"<?php endif; ?>
+                   type="checkbox"<?php
+            if ((!empty($_POST['genre'])) && (!empty($errors)) && (in_array(
+                    'Фэнтези',
+                    $_POST['genre']
+                ))): ?>      checked="checked"<?php
+            endif; ?>
                    value="Фэнтези" name="genre[]">
             <label class="form-check-label" for="defaultCheck3">
                 Фэнтези
@@ -144,7 +192,12 @@ include 'config.php';
         </div>
         <div class="form-check">
             <input class="form-check-input"
-                   type="checkbox"<?php if ((!empty($_POST['genre'])) && (!empty($errors)) && (in_array('Приключения', $_POST['genre']))): ?>      checked="checked"<?php endif; ?>
+                   type="checkbox"<?php
+            if ((!empty($_POST['genre'])) && (!empty($errors)) && (in_array(
+                    'Приключения',
+                    $_POST['genre']
+                ))): ?>      checked="checked"<?php
+            endif; ?>
                    value="Приключения" name="genre[]">
             <label class="form-check-label" for="defaultCheck4">
                 Приключения
@@ -168,7 +221,8 @@ include 'config.php';
     </form>
 </div>
 <!-- footer -->
-<?php include 'parts/footer.php'; ?>
+<?php
+include 'parts/footer.php'; ?>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

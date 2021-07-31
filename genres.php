@@ -26,7 +26,8 @@ $get_genres = get_genres();
     </div>
     <div class="container marketing">
         <div class="row">
-            <?php foreach ($get_genres as $key => $genre): ?>
+            <?php
+            foreach ($get_genres as $key => $genre): ?>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <div class="card-body">
@@ -36,12 +37,14 @@ $get_genres = get_genres();
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            <?php
+            endforeach; ?>
         </div>
     </div>
 </main>
 <!-- footer -->
-<?php include 'parts/footer.php'; ?>
+<?php
+include 'parts/footer.php'; ?>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

@@ -10,7 +10,8 @@
 </head>
 <body>
 <!-- header -->
-<?php include('parts/header.php');
+<?php
+include('parts/header.php');
 include('functions.php');
 include('config.php');
 $id = isset($_GET['id']) ? $_GET['id'] : 1;
@@ -23,9 +24,12 @@ $uniqueAuthors = [];
 foreach ($booksGenre as $item) {
     $uniqueAuthors[$item['author_id']] = $item['name'];
 } ?>
-<?php if (empty($genre)) : ?>
-    <?php include '404.php'; ?>
-<?php else : ?>
+<?php
+if (empty($genre)) : ?>
+    <?php
+    include '404.php'; ?>
+<?php
+else : ?>
 <main role="main">
     <div class="jumbotron">
         <div class="container">
@@ -40,22 +44,27 @@ foreach ($booksGenre as $item) {
             </div>
         </div>
     </div>
-    <?php endif; ?>
-    <?php if (!empty($genre)) : ?>
+    <?php
+    endif; ?>
+    <?php
+    if (!empty($genre)) : ?>
         <hr>
         <div class="mb-4 mt-4 container">
             <h2 class="mb-4">В этом жанре писали следующие авторы:</h2>
-            <?php foreach ($uniqueAuthors as $authorId => $authorName): ?>
+            <?php
+            foreach ($uniqueAuthors as $authorId => $authorName): ?>
                 <ul>
                     <li><a href="/author?id=<?= $authorId; ?>"> <?= $authorName; ?> </a></li>
 
                 </ul>
-            <?php endforeach; ?>
+            <?php
+            endforeach; ?>
         </div>
         <hr>
         <div class="container">
             <h2 class="mb-4">Книги жанра:</h2>
-            <!-- Catalog --><?php foreach ($booksGenre as $booksGenreId): ?>
+            <!-- Catalog --><?php
+            foreach ($booksGenre as $booksGenreId): ?>
                 <div class="card-list">
                     <div class="row card-item mb-4 pb-4 border-bottom">
                         <div class="col-md-3">
@@ -76,12 +85,15 @@ foreach ($booksGenre as $item) {
                     </div>
 
                 </div>
-            <?php endforeach; ?>
+            <?php
+            endforeach; ?>
         </div>
-    <?php endif; ?>
+    <?php
+    endif; ?>
 </main>
 <!-- footer -->
-<?php include('parts/footer.php'); ?>
+<?php
+include('parts/footer.php'); ?>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

@@ -22,10 +22,14 @@ $allBooksCount = getAllBooksCount();
 $pageCount = ceil($allBooksCount / $limit);
 ?>
 <!-- header -->
-<?php include 'parts/header.php'; ?>
-<?php if (empty($books)) : ?>
-<?php include '404.php'; ?>
-<?php else : ?>
+<?php
+include 'parts/header.php'; ?>
+<?php
+if (empty($books)) : ?>
+    <?php
+    include '404.php'; ?>
+<?php
+else : ?>
 <main role="main">
     <div class="jumbotron">
         <div class="container">
@@ -35,12 +39,14 @@ $pageCount = ceil($allBooksCount / $limit);
                 художественную литературу и даже самиздат! Наслаждайтесь выбором! </p>
         </div>
     </div>
-    <?php endif;?>
+    <?php
+    endif; ?>
     <div class="container">
         <!-- Catalog -->
         <div class="card-list">
             <!-- $key cейчас не используется никак, можно без него -->
-            <?php foreach ($books as $book): ?>
+            <?php
+            foreach ($books as $book): ?>
                 <div class="row card-item mb-4 pb-4 border-bottom">
                     <div class="col-md-3">
                         <img class="card-img" src="<?= $book['image']; ?>">
@@ -62,14 +68,16 @@ $pageCount = ceil($allBooksCount / $limit);
         <nav class="text-center" aria-label="Page navigation example">
             <ul class="pagination">
                 <!-- Выводим ссылку на предыдущую страницу только если мы на 2 или более странице -->
-                <?php if ($_GET['page'] > 1): ?>
+                <?php
+                if ($_GET['page'] > 1): ?>
                     <li class="page-item">
                         <a class="page-link" href="/?page=<?= $_GET['page'] - 1; ?>" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Previous</span>
                         </a>
                     </li>
-                <?php endif; ?>
+                <?php
+                endif; ?>
                 <!-- Выводим в цикле нужное количество страниц -->
                 <?php
                 for ($i = 1; $i <= $pageCount; $i++) {
@@ -77,21 +85,24 @@ $pageCount = ceil($allBooksCount / $limit);
                 }
                 ?>
                 <!-- Выводим ссылку на следующую страницу только если мы не на последней странице -->
-                <?php if ($_GET['page'] < $pageCount): ?>
+                <?php
+                if ($_GET['page'] < $pageCount): ?>
                     <li class="page-item">
                         <a class="page-link" href="/?page=<?= $_GET['page'] + 1; ?>" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Next</span>
                         </a>
                     </li>
-                <?php endif; ?>
+                <?php
+                endif; ?>
             </ul>
         </nav>
     </div>
     <!-- /container -->
 </main>
 <!-- footer -->
-<?php include 'parts/footer.php'; ?>
+<?php
+include 'parts/footer.php'; ?>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

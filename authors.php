@@ -14,7 +14,8 @@ include 'config.php';
 include 'functions.php';
 $authors = get_authors();
 ?>
-<?php include 'parts/header.php'; ?>
+<?php
+include 'parts/header.php'; ?>
 <main role="main">
     <div class="jumbotron">
         <div class="container">
@@ -24,16 +25,19 @@ $authors = get_authors();
         </div>
     </div>
     <div class="container marketing">
-        <?php foreach ($authors as $key => $author): ?>
+        <?php
+        foreach ($authors as $key => $author): ?>
             <div class="row featurette">
-                <div class="col-md-7 <? if (($key + 1) % 2 == 0) {
+                <div class="col-md-7 <?
+                if (($key + 1) % 2 == 0) {
                     echo 'order-md-2';
                 } ?> ">
                     <h2 class="featurette-heading"><?= $author['name']; ?></h2>
                     <p class="lead"><?= truncate_string($author['biography'], 300); ?></p>
                     <a class="btn btn-lg btn-primary" href="/author?id=<?= $author['author_id']; ?>" role="button">Подробнее</a>
                 </div>
-                <div class="col-md-5 <? if (($key + 1) % 2 == 0) {
+                <div class="col-md-5 <?
+                if (($key + 1) % 2 == 0) {
                     echo 'order-md-1';
                 } ?>">
                     <a href="/author?id=<?= $author['author_id']; ?>"><img class="featurette-image img-fluid mx-auto"
@@ -46,7 +50,8 @@ $authors = get_authors();
 </main>
 </div>
 <!-- footer -->
-<?php include 'parts/footer.php'; ?>
+<?php
+include 'parts/footer.php'; ?>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
